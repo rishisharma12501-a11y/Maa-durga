@@ -89,7 +89,7 @@
                 <div style="font-size: 1.2em;">की तरफ से सप्रेम भेंट</div>
 
                 <div class="input-group" id="input-area">
-                    <input type="text" id="user-input" class="stylish-input" placeholder="यहाँ नाम लिखें...">
+                    <input type="text" id="user-input" class="stylish-input" placeholder="यहाँ अपना नाम लिखें...">
                     <button class="ok-btn" onclick="updateName()">OK</button>
                 </div>
 
@@ -128,12 +128,16 @@
 
             <div class="premium-card">
                 <p class="shayari" style="color:var(--gold);">माता रानी की कृपा आप पर और आपके पूरे परिवार पर सदा बनी रहे।</p>
-                <a href="javascript:void(0)" class="share-btn" onclick="shareWhatsapp()">🚩 WhatsApp विश भेजें</a>
+                <a href="javascript:void(0)" class="share-btn" onclick="shareWhatsapp()">🚩 सबको भेजे </a>
             </div>
 
             <div style="font-size: 40px; opacity:0.5;">🔱🚩🔱</div>
         </div>
     </div>
+       <div style="display: flex; justify-content: center; align-items: center; margin: 20px 0; width: 100%;">
+    <div style="max-width: 100%; text-align: center;">
+        <script async="async" data-cfasync="false" src="https://pl28920694.effectivegatecpm.com/6d4c9bc72a7b01af7e58bf2a51fa6aa3/invoke.js"></script>
+<div id="container-6d4c9bc72a7b01af7e58bf2a51fa6aa3"></div>
 
     <script>
         let uName = "रोहित";
@@ -167,12 +171,12 @@
         // 3. Music Functions
         function initMusic() {
             let audio = document.getElementById('bg-music');
-            audio.play().catch(() => console.log("Click required for audio"));
-            musicOn = true;
+            // Music Play
+            document.getElementById('bg-music').play().catch(e => console.log("Music click needed"));
         }
 
-        function toggleMusic() {
-            let audio = document.getElementById('bg-music');
+         function toggleMusic() {
+            var audio = document.getElementById("bg-music");
             audio.paused ? audio.play() : audio.pause();
         }
 
