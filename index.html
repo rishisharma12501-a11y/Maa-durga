@@ -77,9 +77,9 @@
 
      <div id="main-content">
         <button class="music-ctrl" onclick="toggleMusic()">🎵</button>
-        <audio id="bg-music" loop>
-            <source src="https://github.com/rishisharma12501-a11y/Maa-durga/blob/main/Maa%20Aa%20Rahi%20Hai%20Ringtone%20Download%20-%20MobCup.Com.Co.mp3" type="audio/mpeg">
-        </audio>
+      <audio id="bg-music" loop preload="auto">
+    <source src="https://raw.githubusercontent.com/rishisharma12501-a11y/Maa-durga/main/Maa%20Aa%20Rahi%20Hai%20Ringtone%20Download%20-%20MobCup.Com.Co.mp3" type="audio/mpeg">
+</audio>
         <div class="page-container">
             
             <div class="premium-card">
@@ -169,11 +169,14 @@
         }
 
         // 3. Music Functions
-        function initMusic() {
-            let audio = document.getElementById('bg-music');
-            // Music Play
-            document.getElementById('bg-music').play().catch(e => console.log("Music click needed"));
-        }
+    function initMusic() {
+    let audio = document.getElementById('bg-music');
+    audio.play().then(() => {
+        console.log("Mata Rani ka bhajan shuru ho gaya!");
+    }).catch(err => {
+        console.log("Abhi user ne click nahi kiya isliye block hai: ", err);
+    });
+}
 
          function toggleMusic() {
             var audio = document.getElementById("bg-music");
