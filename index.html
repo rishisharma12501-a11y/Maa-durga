@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jai Mata Di - World Class Experience</title>
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;700&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ruby: #9b0000;
+            --gold: #FFD700;
+            --deep-maroon: #4a0000;
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            width: 100%; min-height: 100%;
+            background: radial-gradient(circle at center, var(--ruby), var(--deep-maroon));
+            font-family: 'Mukta', sans-serif;
+            color: white; overflow-x: hidden;
+        }
+
+        /* --- GIFT BOX PAGE --- */
+        #entry-gift-page {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, var(--gold), var(--ruby));
+            display: flex; justify-content: center; align-items: center;
+            z-index: 9999; transition: 1s ease-in-out;
+        }
+        .gift-container { text-align: center; cursor: pointer; }
+        .gift-img { width: 150px; animation: bounce 1s infinite alternate; filter: drop-shadow(0 0 20px #fff); }
+        @keyframes bounce { from { transform: scale(1); } to { transform: scale(1.15); } }
+
+        /* --- FLOWER RAIN CANVAS --- */
+        #flower-canvas { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 5; display: none; }
+
+        /* --- MAIN CONTENT --- */
+        #main-content { display: none; opacity: 0; transition: 1.5s; position: relative; z-index: 10; }
+        .page-container { display: flex; flex-direction: column; align-items: center; padding: 40px 0 100px 0; gap: 20px; }
+
+        .premium-card {
+            width: 90%; max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 2px solid var(--gold);
+            border-radius: 30px; padding: 30px; text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+        }
+
+        .main-avatar { width: 220px; height: 220px; border-radius: 50%; border: 5px solid var(--gold); box-shadow: 0 0 40px var(--gold); object-fit: cover; }
+        
+        .wishing-name { font-size: 2.5em; color: var(--gold); text-shadow: 0 0 15px gold; font-weight: bold; margin-top: 10px; }
+
+        .input-group { margin-top: 15px; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 15px; border: 1px solid var(--gold); }
+        .stylish-input { background: transparent; border: none; color: white; width: 60%; font-size: 1.1em; outline: none; text-align: center; }
+        .ok-btn { background: var(--gold); border: none; padding: 8px 20px; border-radius: 10px; font-weight: bold; cursor: pointer; }
+
+        .shlok { font-size: 1.5em; color: var(--gold); font-weight: bold; margin: 15px 0; }
+        .shayari { font-size: 1.2em; line-height: 1.6; }
+
+        .timer-box { background: rgba(0,0,0,0.4); padding: 10px; border-radius: 12px; border: 1px solid var(--gold); min-width: 60px; display: inline-block; margin: 5px; }
+
+        .music-ctrl { position: fixed; bottom: 25px; right: 25px; background: var(--gold); border-radius: 50%; width: 55px; height: 55px; border: none; cursor: pointer; font-size: 25px; z-index: 100; }
+        .share-btn { background: #25D366; color: white; padding: 15px 45px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.2em; display: inline-block; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="entry-gift-page" onclick="openGift()">
+        <div class="gift-container">
+            <img src="https://cdn-icons-png.flaticon.com/512/1139/1139982.png" class="gift-img">
+            <h2 style="color:#4a0000;">🚩 माता रानी का संदेश 🚩<br><small>(खोलने के लिए क्लिक करें)</small></h2>
+        </div>
+    </div>
+
+    <canvas id="flower-canvas"></canvas>
+
+    <div id="main-content">
+        <button class="music-ctrl" onclick="toggleMusic()">🎵</button>
+        <audio id="bg-music" loop><source src="C:\Users\Hi\Downloads\Maa Aa Rahi Hai Ringtone Download - MobCup.Com.Co.mp3"></audio>
+
+        <div class="page-container">
+            
+            <div class="premium-card">
+                <img src="https://i0.wp.com/wordzz.com/wp-content/uploads/2016/08/Navratri-Durga-Maa.jpg?fit=1024%2C768&ssl=1" class="main-avatar">
+                
+                <div id="display-name" class="wishing-name">🚩 आपका नाम 🚩</div>
+                <div style="font-size: 1.2em;">की तरफ से सप्रेम भेंट</div>
+
+                <div class="input-group" id="input-area">
+                    <input type="text" id="user-input" class="stylish-input" placeholder="यहाँ नाम लिखें...">
+                    <button class="ok-btn" onclick="updateName()">OK</button>
+                </div>
+
+                <h1 style="font-family: 'Cinzel', serif; color:var(--gold); margin-top:15px;">शुभ नवरात्रि</h1>
+                <div style="font-size: 30px;">🪔 🔱 🪔</div>
+            </div>
+
+            <div class="premium-card">
+                <p class="shlok">नवरात्रि आगमन उत्सव</p>
+                <div id="timer">
+                    <div class="timer-box"><span id="days">00</span><br><small>दिन</small></div>
+                    <div class="timer-box"><span id="hours">00</span><br><small>घंटे</small></div>
+                    <div class="timer-box"><span id="minutes">00</span><br><small>मिनट</small></div>
+                    <div class="timer-box"><span id="seconds">00</span><br><small>सेकंड</small></div>
+                </div>
+            </div>
+
+            <div class="premium-card">
+                <p class="shlok">॥ जय माता दी ॥</p>
+                <p class="shayari">
+                    "लाल रंग की चुनरी से सजा माँ का दरबार,<br>
+                    हर्षित हुआ मन, पुलकित हुआ संसार।<br>
+                    नन्हे-नन्हे कदमों से माँ आए आपके द्वार,<br>
+                    मुबारक हो आपको नवरात्रि का त्योहार।"
+                </p>
+            </div>
+
+            <div class="premium-card">
+                <p class="shayari" style="color:var(--gold);">माता रानी की कृपा आप पर और आपके पूरे परिवार पर सदा बनी रहे।</p>
+                <a href="javascript:void(0)" class="share-btn" onclick="shareWhatsapp()">🚩 WhatsApp विश भेजें</a>
+            </div>
+
+            <div style="font-size: 40px; opacity:0.5;">🔱🚩🔱</div>
+        </div>
+    </div>
+
+    <script>
+        let uName = "रोहित";
+        let musicOn = false;
+
+        // 1. Update Name Function
+        function updateName() {
+            let input = document.getElementById('user-input').value;
+            if (input.trim() === "") { alert("नाम लिखें!"); return; }
+            uName = input;
+            document.getElementById('display-name').innerText = uName;
+            document.getElementById('input-area').style.display = 'none';
+        }
+
+        // 2. Open Gift & Start Everything
+        function openGift() {
+            document.getElementById('entry-gift-page').style.transform = 'translateY(-100%)';
+            setTimeout(() => {
+                document.getElementById('entry-gift-page').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                setTimeout(() => { document.getElementById('main-content').style.opacity = '1'; }, 50);
+                
+                // Start Flowers & Music
+                document.getElementById('flower-canvas').style.display = 'block';
+                initMusic();
+                animateFlowers();
+                startTimer();
+            }, 800);
+        }
+
+        // 3. Music Functions
+        function initMusic() {
+            let audio = document.getElementById('bg-music');
+            audio.play().catch(() => console.log("Click required for audio"));
+            musicOn = true;
+        }
+
+        function toggleMusic() {
+            let audio = document.getElementById('bg-music');
+            audio.paused ? audio.play() : audio.pause();
+        }
+
+        // 4. Flower Rain System
+        const canvas = document.getElementById('flower-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const flowers = [];
+        const flowerIcons = ["🌸", "🌼", "🌹", "🌷"];
+
+        class Flower {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * -canvas.height;
+                this.text = flowerIcons[Math.floor(Math.random() * flowerIcons.length)];
+                this.speed = Math.random() * 2 + 1;
+                this.size = Math.random() * 10 + 20;
+            }
+            draw() { ctx.font = `${this.size}px serif`; ctx.fillText(this.text, this.x, this.y); }
+            update() { this.y += this.speed; if (this.y > canvas.height) this.y = -20; }
+        }
+
+        for (let i = 0; i < 50; i++) flowers.push(new Flower());
+
+        function animateFlowers() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            flowers.forEach(f => { f.update(); f.draw(); });
+            requestAnimationFrame(animateFlowers);
+        }
+
+        // 5. Timer
+        function startTimer() {
+            const target = new Date("March 19, 2026 00:00:00").getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const diff = target - now;
+                document.getElementById('days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById('hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            }, 1000);
+        }
+
+        // 6. WhatsApp Share
+        function shareWhatsapp() {
+            const msg = "*" + uName + "* की तरफ से आपको और आपके पूरे परिवार को *चैत्र नवरात्रि* की हार्दिक शुभकामनाएं! 🙏🚩\n\nमाता रानी का आशीर्वाद यहाँ देखें:\n" + window.location.href;
+            window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(msg), '_blank');
+        }
+
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+    </script>
+</body>
+</html>
